@@ -1,0 +1,68 @@
+diff --git a/src/runtime/client/client.js b/src/runtime/client/client.js
+index 2942747f9df9188ce38b0d46f74c800107735f0c..ee556f5f867ad6f272cb20ea89cebd48c42a1a9d 100644
+--- a/src/runtime/client/client.js
++++ b/src/runtime/client/client.js
+@@ -2741,10 +2741,10 @@ async function _hydrate(
+  */
+ async function load_data(url, invalid) {
+ 	const data_url = new URL(url);
+-	data_url.pathname = add_data_suffix(url.pathname);
++	/*data_url.pathname = add_data_suffix(url.pathname);
+ 	if (url.pathname.endsWith('/')) {
+ 		data_url.searchParams.append(TRAILING_SLASH_PARAM, '1');
+-	}
++	}*/
+ 	if (DEV && url.searchParams.has(INVALIDATED_PARAM)) {
+ 		throw new Error(`Cannot used reserved query parameter "${INVALIDATED_PARAM}"`);
+ 	}
+@@ -2752,7 +2752,11 @@ async function load_data(url, invalid) {
+
+ 	// use window.fetch directly to allow using a 3rd party-patched fetch implementation
+ 	const fetcher = DEV ? dev_fetch : window.fetch;
+-	const res = await fetcher(data_url.href, {});
++    const res = await fetcher(data_url.href, {
++        headers: {
++            'accept': 'application/json'
++        }
++    });
+
+ 	if (!res.ok) {
+ 		// error message is a JSON-stringified string which devalue can't handle at the top level
+diff --git a/src/runtime/server/page/render.js b/src/runtime/server/page/render.js
+index 2ad4908508d01e80441aadf82609989237876bb4..6265cc483df29c5606f6cba9a348a029bf4a7d65 100644
+--- a/src/runtime/server/page/render.js
++++ b/src/runtime/server/page/render.js
+@@ -540,7 +540,6 @@ export async function render_response({
+ 	}
+
+ 	const headers = new Headers({
+-		'x-sveltekit-page': 'true',
+ 		'content-type': 'text/html'
+ 	});
+
+diff --git a/src/runtime/server/respond.js b/src/runtime/server/respond.js
+index 2e97adaaf441f65355f24b1bbe5a385dbbb4d443..73101b8bb212715dfa19f990cc7beb1876e12203 100644
+--- a/src/runtime/server/respond.js
++++ b/src/runtime/server/respond.js
+@@ -71,7 +71,7 @@ export async function internal_respond(request, options, manifest, state) {
+ 	const url = new URL(request.url);
+
+ 	const is_route_resolution_request = has_resolution_suffix(url.pathname);
+-	const is_data_request = has_data_suffix(url.pathname);
++    const is_data_request = request.method === 'GET' && request.headers.get('accept') === 'application/json';
+ 	const remote_id = get_remote_id(url);
+
+ 	if (!DEV) {
+@@ -119,10 +119,10 @@ export async function internal_respond(request, options, manifest, state) {
+ 		 */
+ 		url.pathname = strip_resolution_suffix(url.pathname);
+ 	} else if (is_data_request) {
+-		url.pathname =
++		/*url.pathname =
+ 			strip_data_suffix(url.pathname) +
+ 				(url.searchParams.get(TRAILING_SLASH_PARAM) === '1' ? '/' : '') || '/';
+-		url.searchParams.delete(TRAILING_SLASH_PARAM);
++		url.searchParams.delete(TRAILING_SLASH_PARAM);*/
+ 		invalidated_data_nodes = url.searchParams
+ 			.get(INVALIDATED_PARAM)
+ 			?.split('')
