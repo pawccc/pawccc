@@ -1,80 +1,73 @@
-<div class="m-2 grid gap-2 grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
-	<a href="/a">
-		<svg
-			fill="currentColor"
-			viewBox="0 0 16 16"
-			xmlns="http://www.w3.org/2000/svg"
-			class="h-auto max-w-full rounded-sm bg-gray-100 dark:bg-gray-600 text-gray-600 dark:text-gray-300"
-			><path
-				fill-rule="evenodd"
-				d="M8 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-				clip-rule="evenodd"
-			></path></svg
-		>
-	</a>
-	<a href="/b">
-		<svg
-			fill="currentColor"
-			viewBox="0 0 16 16"
-			xmlns="http://www.w3.org/2000/svg"
-			class="h-auto max-w-full rounded-sm bg-gray-100 dark:bg-gray-600 text-gray-600 dark:text-gray-300"
-			><path
-				fill-rule="evenodd"
-				d="M8 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-				clip-rule="evenodd"
-			></path></svg
-		>
-	</a>
-	<a href="/c">
-		<svg
-			fill="currentColor"
-			viewBox="0 0 16 16"
-			xmlns="http://www.w3.org/2000/svg"
-			class="h-auto max-w-full rounded-sm bg-gray-100 dark:bg-gray-600 text-gray-600 dark:text-gray-300"
-			><path
-				fill-rule="evenodd"
-				d="M8 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-				clip-rule="evenodd"
-			></path></svg
-		>
-	</a>
-	<a href="/d">
-		<svg
-			fill="currentColor"
-			viewBox="0 0 16 16"
-			xmlns="http://www.w3.org/2000/svg"
-			class="h-auto max-w-full rounded-sm bg-gray-100 dark:bg-gray-600 text-gray-600 dark:text-gray-300"
-			><path
-				fill-rule="evenodd"
-				d="M8 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-				clip-rule="evenodd"
-			></path></svg
-		>
-	</a>
-	<a href="/e">
-		<svg
-			fill="currentColor"
-			viewBox="0 0 16 16"
-			xmlns="http://www.w3.org/2000/svg"
-			class="h-auto max-w-full rounded-sm bg-gray-100 dark:bg-gray-600 text-gray-600 dark:text-gray-300"
-			><path
-				fill-rule="evenodd"
-				d="M8 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-				clip-rule="evenodd"
-			></path></svg
-		>
-	</a>
-	<a href="/f">
-		<svg
-			fill="currentColor"
-			viewBox="0 0 16 16"
-			xmlns="http://www.w3.org/2000/svg"
-			class="h-auto max-w-full rounded-sm bg-gray-100 dark:bg-gray-600 text-gray-600 dark:text-gray-300"
-			><path
-				fill-rule="evenodd"
-				d="M8 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-				clip-rule="evenodd"
-			></path></svg
-		>
-	</a>
+<script lang="ts">
+	import { enhance } from '$app/forms';
+	import type { LayoutProps } from './$types';
+	import { ToolbarButton, Textarea, Avatar } from 'flowbite-svelte';
+	import { ImageOutline, FaceGrinOutline, PaperPlaneOutline } from 'flowbite-svelte-icons';
+
+	let { data }: LayoutProps = $props();
+
+	let form: HTMLFormElement;
+</script>
+
+<div class="flex flex-col h-screen max-w-7xl mx-auto">
+	<div class="flex-1 overflow-y-scroll">
+		{#each data.messages as message (message.id)}
+			<div class="flex items-start gap-2.5">
+				<Avatar />
+				<div class="flex flex-col w-full max-w-[320px] leading-1.5">
+					<div class="flex items-center space-x-2 rtl:space-x-reverse">
+						<span class="text-sm font-semibold text-gray-900 dark:text-white">{message.name}</span>
+						<span class="text-sm font-normal text-gray-500 dark:text-gray-400">{message.date}</span>
+					</div>
+					<p
+						class="text-sm font-normal py-2 mb-1 text-gray-900 dark:text-white p-4 border-gray-200 bg-gray-100 rounded-e-xl rounded-es-xl dark:bg-gray-700"
+					>
+						{message.text}
+					</p>
+				</div>
+			</div>
+		{/each}
+	</div>
+
+	<form
+		method="POST"
+		use:enhance={() => {
+			return ({ update }) => {
+				update({ invalidateAll: false });
+			};
+		}}
+		bind:this={form}
+		class="flex items-center rounded-lg px-3 py-2 bg-gray-50 dark:bg-gray-700"
+		style="align-items: flex-end"
+	>
+		<ToolbarButton color="dark" class="text-gray-500 dark:text-gray-400 mb-1.5">
+			<ImageOutline class="h-6 w-6" />
+		</ToolbarButton>
+		<ToolbarButton color="dark" class="text-gray-500 dark:text-gray-400 mb-1.5">
+			<FaceGrinOutline class="h-6 w-6" />
+		</ToolbarButton>
+		<Textarea
+			class="mx-4 w-full resize-none overflow-hidden bg-white dark:bg-gray-800"
+			classes={{ div: 'w-full' }}
+			rows={1}
+			placeholder="Message"
+			oninput={(event) => {
+				event.target.style.height = '0px';
+				event.target.style.height = event.target.scrollHeight + 2 + 'px';
+			}}
+			onkeypress={(event) => {
+				if (event.keyCode === 13 && !event.shiftKey) {
+					event.preventDefault();
+					form.requestSubmit();
+
+					event.target.value = '';
+					event.target.style.height = '0px';
+					event.target.style.height = event.target.scrollHeight + 2 + 'px';
+				}
+			}}
+		/>
+		<ToolbarButton type="submit" color="primary" class="ml-6 rounded-full mb-1.5">
+			<PaperPlaneOutline class="h-6 w-6 rotate-45" />
+		</ToolbarButton>
+	</form>
 </div>

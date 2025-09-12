@@ -11,14 +11,14 @@ export const actions: Actions = {
 		const data = await request.formData();
 
 		const username = data.get('username');
-		if (!username) fail(400);
+		if (!username) return fail(400);
 
-		const [user] = await sql`SELECT id FROM users WHERE username = ${username}`;
-		if (!user) fail(400);
+		const [user] = await sql`SELECT id FROM "user" WHERE username = ${username}`;
+		if (!user) return fail(400);
 
 		const password = getRandomAlphanumericString(8);
 		const expiresAt = new Date(Date.now() + 60 * 60 * 1000);
-		await sql`INSERT INTO users_otp ("user", password, expires_at) VALUES (${user.id}, ${password}, ${expiresAt})`;
+		await sql`INSERT INTO user_otp ("user", password, expires_at) VALUES (${user.id}, ${password}, ${expiresAt})`;
 
 		redirect(302, '/sign-in');
 	}

@@ -26,13 +26,24 @@
 		<InputAddon>
 			<LockOutline class="h-6 w-6" />
 		</InputAddon>
-		<Input name="password" type="password" required placeholder={$locale.changePassword.password} />
+		<Input
+			name="password"
+			type="password"
+			autocomplete="new-password"
+			required
+			placeholder={$locale.changePassword.password}
+		/>
 	</ButtonGroup>
 	<ButtonGroup class="w-full mt-4">
 		<InputAddon>
 			<LockOutline class="h-6 w-6" />
 		</InputAddon>
-		<Input type="password" required placeholder={$locale.changePassword.passwordRepeat} />
+		<Input
+			type="password"
+			autocomplete="new-password"
+			required
+			placeholder={$locale.changePassword.passwordRepeat}
+		/>
 	</ButtonGroup>
 
 	<Button type="submit" class="w-full mt-10" {loading}>{$locale.changePassword.action}</Button>

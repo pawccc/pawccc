@@ -1,6 +1,5 @@
 import { signIn } from '$lib/auth';
 import type { Actions, PageServerLoad } from './$types';
-import { CredentialsSignin } from '@auth/core/errors';
 import { fail, redirect } from '@sveltejs/kit';
 
 export const load: PageServerLoad = async (event) => {
@@ -9,13 +8,12 @@ export const load: PageServerLoad = async (event) => {
 
 export const actions: Actions = {
 	default: async (event) => {
-		try {
-			await signIn(event);
-		} catch (error) {
-			if (error instanceof CredentialsSignin) {
+		return await signIn(event).catch((error) => {
+			if (error instanceof Error) {
 				return fail(400);
+			} else {
+				return redirect(302, '/');
 			}
-		}
-		return redirect(302, '/');
+		});
 	}
 };
