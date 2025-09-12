@@ -1,5 +1,5 @@
-import type { PageServerLoad, Actions } from './$types';
-import { redirect } from '@sveltejs/kit';
+import type { Actions, PageServerLoad } from './$types';
+import { fail, redirect } from '@sveltejs/kit';
 import { sql } from 'bun';
 
 export const load: PageServerLoad = async (event) => {
@@ -11,11 +11,16 @@ export const actions: Actions = {
 		const data = await request.formData();
 
 		const username = data.get('username');
+		if (!username) fail(400);
+
 		const [user] = await sql`SELECT id FROM users WHERE username = ${username}`;
+		if (!user) fail(400);
 
 		const password = getRandomAlphanumericString(8);
 		const expiresAt = new Date(Date.now() + 60 * 60 * 1000);
 		await sql`INSERT INTO users_otp ("user", password, expires_at) VALUES (${user.id}, ${password}, ${expiresAt})`;
+
+		redirect(302, '/sign-in');
 	}
 };
 

@@ -1,6 +1,6 @@
-import type { PageServerLoad, Actions } from './$types';
-import { redirect } from '@sveltejs/kit';
-import { sql, password } from 'bun';
+import type { Actions, PageServerLoad } from './$types';
+import { fail, redirect } from '@sveltejs/kit';
+import { password, sql } from 'bun';
 
 export const load: PageServerLoad = async (event) => {
 	if (await event.locals.auth()) redirect(302, '/');
@@ -11,9 +11,16 @@ export const actions: Actions = {
 		const data = await request.formData();
 
 		const otp = url.searchParams.get('otp');
+		if (!otp) fail(400);
+
 		const [user_otp] = await sql`DELETE FROM users_otp WHERE password = ${otp} RETURNING "user"`;
+		if (!user_otp) fail(400);
 
 		const pwd = data.get('password');
+		if (!pwd) fail(400);
+
 		await sql`UPDATE users SET password = ${await password.hash(pwd)} WHERE id = ${user_otp.user}`;
+
+		redirect(302, '/sign-in');
 	}
 };

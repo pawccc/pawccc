@@ -1,3 +1,30 @@
 {
-	"name": "🇬🇧 English"
+	"name": "🇬🇧 English",
+	"changePassword": {
+		"title": "Change password",
+		"password": "Password",
+		"passwordRepeat": "Repeat password",
+		"action": "Change password"
+	},
+	"forgotPassword": {
+		"title": "Forgot password",
+		"username": "Username",
+		"action": "Change password"
+	},
+	"signIn": {
+		"title": "Sign-in",
+		"username": "Username",
+		"questionUsername": "Don't have an account yet?",
+		"password": "Password",
+		"questionPassword": "Forgot your password?",
+		"action": "Sign-in"
+	},
+	"signUp": {
+		"title": "Sign-up",
+		"email": "E-Mail",
+		"username": "Username",
+		"questionUsername": "Already have an account?",
+		"terms": "Agree to terms and conditions",
+		"action": "Sign-up"
+	}
 }

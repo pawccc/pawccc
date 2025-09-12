@@ -21,5 +21,10 @@ export const { handle, signIn, signOut } = SvelteKitAuth({
 	pages: {
 		signIn: '/sign-in',
 		signOut: '/sign-out'
+	},
+	logger: {
+		error() {},
+		warn() {},
+		debug() {}
 	}
 });

@@ -1,3 +1,30 @@
 {
-	"name": "🇩🇪 Deutsch"
+	"name": "🇩🇪 Deutsch",
+	"changePassword": {
+		"title": "Passwort ändern",
+		"password": "Passwort",
+		"passwordRepeat": "Passwort wiederholen",
+		"action": "Passwort ändern"
+	},
+	"forgotPassword": {
+		"title": "Passwort vergessen",
+		"username": "Nutzername",
+		"action": "Passwort ändern"
+	},
+	"signIn": {
+		"title": "Anmeldung",
+		"username": "Nutzername",
+		"questionUsername": "Noch kein Konto?",
+		"password": "Passwort",
+		"questionPassword": "Passwort vergessen?",
+		"action": "Anmelden"
+	},
+	"signUp": {
+		"title": "Registrierung",
+		"email": "E-Mail",
+		"username": "Nutzername",
+		"questionUsername": "Bereits ein Konto?",
+		"terms": "Stimme den Nutzungsbedingungen zu",
+		"action": "Registrieren"
+	}
 }
