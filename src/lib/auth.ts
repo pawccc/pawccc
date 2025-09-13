@@ -3,6 +3,7 @@ import { SvelteKitAuth } from '@auth/sveltekit';
 import { sql, password } from 'bun';
 
 export const { handle, signIn, signOut } = SvelteKitAuth({
+	trustHost: true,
 	providers: [
 		Credentials({
 			credentials: {
