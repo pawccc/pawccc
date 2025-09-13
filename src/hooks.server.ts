@@ -1,3 +1,4 @@
+import { building } from '$app/environment';
 import { handle as handleAuth } from '$lib/auth';
 import { all, default as cur } from '$lib/locales';
 import type { ServerInit } from '@sveltejs/kit';
@@ -5,6 +6,8 @@ import { sequence } from '@sveltejs/kit/hooks';
 import { sql } from 'bun';
 
 export const init: ServerInit = async () => {
+	if (building) return;
+
 	await sql`CREATE SEQUENCE IF NOT EXISTS version`;
 	while (true) {
 		const [version] = await sql`SELECT last_value FROM version;`;

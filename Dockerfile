@@ -3,13 +3,12 @@ WORKDIR /usr/src/app
 
 FROM base AS dependencies
 RUN mkdir -p /temp
-COPY package.json bun.lock /temp/
+COPY package.json bun.lock tsconfig.json vite.config.ts svelte.config.js /temp/
 COPY patches /temp/patches
 RUN cd /temp && bun install --frozen-lockfile
 
 FROM base AS build
 COPY --from=dependencies /temp .
-COPY tsconfig.json vite.config.ts svelte.config.js  ./
 COPY src ./src
 COPY static ./static
 
