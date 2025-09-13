@@ -14,7 +14,6 @@ COPY src ./src
 COPY static ./static
 
 ENV NODE_ENV=production
-#RUN bun test
 RUN bun run build
 
 FROM base AS deployment
