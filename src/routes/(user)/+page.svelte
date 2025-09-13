@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import type { LayoutProps } from './$types';
+	import type { PageProps } from './$types';
 	import { ToolbarButton, Textarea, Avatar } from 'flowbite-svelte';
 	import { ImageOutline, FaceGrinOutline, PaperPlaneOutline } from 'flowbite-svelte-icons';
 
-	let { data }: LayoutProps = $props();
+	let { data }: PageProps = $props();
 
 	let form: HTMLFormElement;
 </script>

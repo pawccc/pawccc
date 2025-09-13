@@ -3,7 +3,8 @@ import { fail, redirect } from '@sveltejs/kit';
 import { password, sql } from 'bun';
 
 export const load: PageServerLoad = async (event) => {
-	if (await event.locals.auth()) redirect(302, '/');
+	const session = await event.locals.auth();
+	if (session?.user) redirect(302, '/');
 };
 
 export const actions: Actions = {

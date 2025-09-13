@@ -1,10 +1,9 @@
 <script lang="ts">
-	import { enhance } from '$app/forms';
+	import Form from '$lib/components/Form.svelte';
 	import locale from '$lib/locales';
-	import { Input, ButtonGroup, InputAddon, Button } from 'flowbite-svelte';
+	import { Input, ButtonGroup, InputAddon } from 'flowbite-svelte';
 	import { EyeOutline, EyeSlashOutline, UserOutline } from 'flowbite-svelte-icons';
 
-	let loading = $state(false);
 	let showPassword = $state(false);
 </script>
 
@@ -12,17 +11,7 @@
 	<title>{$locale.signIn.title}</title>
 </svelte:head>
 
-<form
-	method="POST"
-	use:enhance={() => {
-		loading = true;
-		return ({ update }) => {
-			update({ invalidateAll: false }).finally(async () => {
-				loading = false;
-			});
-		};
-	}}
->
+<Form>
 	<input type="hidden" name="providerId" value="credentials" />
 
 	<ButtonGroup class="w-full">
@@ -54,9 +43,12 @@
 		<a class="text-primary-600" href="/forgot-password">{$locale.forgotPassword.action}</a>
 	</p>
 
-	<Button type="submit" class="w-full mt-10" {loading}>{$locale.signIn.action}</Button>
-	<p class="text-sm mt-4">
-		{$locale.signIn.questionUsername}
-		<a class="text-primary-600" href="/sign-up">{$locale.signUp.action}</a>
-	</p>
-</form>
+	{#snippet button()}
+		{$locale.signIn.action}
+	{/snippet}
+</Form>
+
+<p class="text-sm mt-4">
+	{$locale.signIn.questionUsername}
+	<a class="text-primary-600" href="/sign-up">{$locale.signUp.action}</a>
+</p>

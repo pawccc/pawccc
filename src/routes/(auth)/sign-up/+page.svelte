@@ -1,27 +1,15 @@
 <script lang="ts">
-	import { enhance } from '$app/forms';
+	import Form from '$lib/components/Form.svelte';
 	import locale from '$lib/locales';
-	import { Checkbox, Input, ButtonGroup, InputAddon, Button } from 'flowbite-svelte';
+	import { Checkbox, Input, ButtonGroup, InputAddon } from 'flowbite-svelte';
 	import { EnvelopeOutline, UserOutline } from 'flowbite-svelte-icons';
-
-	let loading = $state(false);
 </script>
 
 <svelte:head>
 	<title>{$locale.signUp.title}</title>
 </svelte:head>
 
-<form
-	method="POST"
-	use:enhance={() => {
-		loading = true;
-		return ({ update }) => {
-			update({ invalidateAll: false }).finally(async () => {
-				loading = false;
-			});
-		};
-	}}
->
+<Form>
 	<ButtonGroup class="w-full">
 		<InputAddon>
 			<UserOutline class="h-6 w-6" />
@@ -38,9 +26,12 @@
 
 	<Checkbox>{$locale.signUp.terms}</Checkbox>
 
-	<Button type="submit" class="w-full mt-10" {loading}>{$locale.signUp.action}</Button>
-	<p class="text-sm mt-4">
-		{$locale.signUp.questionUsername}
-		<a class="text-primary-600" href="/sign-in">{$locale.signIn.action}</a>
-	</p>
-</form>
+	{#snippet button()}
+		{$locale.signUp.action}
+	{/snippet}
+</Form>
+
+<p class="text-sm mt-4">
+	{$locale.signUp.questionUsername}
+	<a class="text-primary-600" href="/sign-in">{$locale.signIn.action}</a>
+</p>
