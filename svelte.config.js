@@ -15,10 +15,9 @@ const config = {
 				'img-src': ['self', 'data:'],
 				'object-src': ['none'],
 				'script-src': [],
-				'style-src': []
+				'style-src': ['self']
 			}
-		},
-		inlineStyleThreshold: Infinity
+		}
 	}
 };
 
