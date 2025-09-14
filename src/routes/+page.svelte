@@ -9,6 +9,10 @@
 	let form: HTMLFormElement;
 </script>
 
+<svelte:head>
+	<title></title>
+</svelte:head>
+
 <div class="flex flex-col h-screen max-w-7xl mx-auto">
 	<div class="flex-1 overflow-y-scroll">
 		{#each data.messages as message (message.id)}
@@ -37,8 +41,7 @@
 			};
 		}}
 		bind:this={form}
-		class="flex items-center rounded-lg px-3 py-2 bg-gray-50 dark:bg-gray-700"
-		style="align-items: flex-end"
+		class="flex items-end rounded-lg px-3 py-2 bg-gray-50 dark:bg-gray-700"
 	>
 		<ToolbarButton color="dark" class="text-gray-500 dark:text-gray-400 mb-1.5">
 			<ImageOutline class="h-6 w-6" />

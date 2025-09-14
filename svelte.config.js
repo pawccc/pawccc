@@ -9,10 +9,16 @@ const config = {
 	kit: {
 		adapter: adapter(),
 		csp: {
+			mode: 'auto',
 			directives: {
-				'default-src': ['self']
+				'default-src': ['self'],
+				'img-src': ['self', 'data:'],
+				'object-src': ['none'],
+				'script-src': [],
+				'style-src': []
 			}
-		}
+		},
+		inlineStyleThreshold: Infinity
 	}
 };
 
