@@ -5,5 +5,5 @@ export const GET: RequestHandler = async ({ url, cookies }) => {
 		url.protocol == 'https:' ? '__Secure-authjs.session-token' : 'authjs.session-token',
 		{ path: '/' }
 	);
-	redirect(302, '/sign-in');
+	redirect(303, '/sign-in');
 };

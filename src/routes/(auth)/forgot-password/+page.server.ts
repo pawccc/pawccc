@@ -3,8 +3,8 @@ import { fail, redirect } from '@sveltejs/kit';
 import { sql } from 'bun';
 
 export const load: PageServerLoad = async (event) => {
-	const session = await event.locals.auth();
-	if (session?.user) redirect(302, '/');
+	// Already authenticated
+	if ((await event.locals.auth())?.user) redirect(303, '/');
 };
 
 export const actions: Actions = {
@@ -21,12 +21,12 @@ export const actions: Actions = {
 		const expiresAt = new Date(Date.now() + 60 * 60 * 1000);
 		await sql`INSERT INTO user_otp ("user", password, expires_at) VALUES (${user.id}, ${password}, ${expiresAt})`;
 
-		redirect(302, '/sign-in');
+		redirect(303, '/sign-in');
 	}
 };
 
 function getRandomAlphanumericString(length: number): string {
-	const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+	const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 	const array = new Uint32Array(length);
 	crypto.getRandomValues(array);
 	return Array.from(array, (x) => chars[x % chars.length]).join('');

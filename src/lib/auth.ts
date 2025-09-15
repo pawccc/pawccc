@@ -2,6 +2,14 @@ import Credentials from '@auth/core/providers/credentials';
 import { SvelteKitAuth } from '@auth/sveltekit';
 import { sql, password } from 'bun';
 
+declare module '@auth/sveltekit' {
+	interface Session {
+		user: {
+			id: number;
+		};
+	}
+}
+
 export const { handle, signIn, signOut } = SvelteKitAuth({
 	trustHost: true,
 	providers: [
@@ -12,12 +20,15 @@ export const { handle, signIn, signOut } = SvelteKitAuth({
 			},
 			authorize: async (credentials) => {
 				const [user] =
-					await sql`SELECT password FROM "user" WHERE username = ${credentials.username}`;
+					await sql`SELECT id, password FROM "user" WHERE username = ${credentials.username}`;
 				if (!user) return null;
 
+				if (!user.password) return null;
 				if (!(await password.verify(credentials.password, user.password))) return null;
 
-				return {};
+				return {
+					id: user.id
+				};
 			}
 		})
 	],
@@ -25,9 +36,12 @@ export const { handle, signIn, signOut } = SvelteKitAuth({
 		signIn: '/sign-in',
 		signOut: '/sign-out'
 	},
-	logger: {
-		error() {},
-		warn() {},
-		debug() {}
+	callbacks: {
+		session: async ({ session, token }) => {
+			session.user = {
+				id: token.sub
+			};
+			return session;
+		}
 	}
 });

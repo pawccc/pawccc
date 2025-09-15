@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Form from '$lib/components/Form.svelte';
 	import locale from '$lib/locales';
+	import Form from '../Form.svelte';
 	import { Input, ButtonGroup, InputAddon } from 'flowbite-svelte';
 	import { EyeOutline, EyeSlashOutline, UserOutline } from 'flowbite-svelte-icons';
 

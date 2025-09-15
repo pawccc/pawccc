@@ -4,16 +4,14 @@ import { CredentialsSignin } from '@auth/core/errors';
 import { fail, redirect } from '@sveltejs/kit';
 
 export const load: PageServerLoad = async (event) => {
-	const session = await event.locals.auth();
-	if (session?.user) redirect(302, '/');
+	// Already authenticated
+	if ((await event.locals.auth())?.user) redirect(303, '/');
 };
 
 export const actions: Actions = {
 	default: async (event) => {
 		return await signIn(event).catch((error) => {
-			if (error instanceof CredentialsSignin) {
-				return fail(400);
-			}
+			if (error instanceof CredentialsSignin) return fail(400);
 			throw error;
 		});
 	}

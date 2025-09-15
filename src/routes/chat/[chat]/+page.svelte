@@ -20,11 +20,11 @@
 				<Avatar />
 				<div class="flex flex-col w-full max-w-[320px] leading-1.5">
 					<div class="flex items-center space-x-2 rtl:space-x-reverse">
-						<span class="text-sm font-semibold text-gray-900 dark:text-white">{message.name}</span>
+						<span class="text-sm font-semibold text-gray-900 dark:text-white">{message.user}</span>
 						<span class="text-sm font-normal text-gray-500 dark:text-gray-400">{message.date}</span>
 					</div>
 					<p
-						class="text-sm font-normal py-2 mb-1 text-gray-900 dark:text-white p-4 border-gray-200 bg-gray-100 rounded-e-xl rounded-es-xl dark:bg-gray-700"
+						class="text-sm font-normal py-2 mb-1 rounded-e-xl rounded-es-xl text-gray-900 dark:text-white p-4 border-gray-200 bg-gray-100 dark:bg-gray-700"
 					>
 						{message.text}
 					</p>
@@ -35,13 +35,13 @@
 
 	<form
 		method="POST"
+		class="flex items-end rounded-lg px-3 py-2 bg-gray-50 dark:bg-gray-700"
 		use:enhance={() => {
 			return ({ update }) => {
 				update({ invalidateAll: false });
 			};
 		}}
 		bind:this={form}
-		class="flex items-end rounded-lg px-3 py-2 bg-gray-50 dark:bg-gray-700"
 	>
 		<ToolbarButton color="dark" class="text-gray-500 dark:text-gray-400 mb-1.5">
 			<ImageOutline class="h-6 w-6" />
@@ -50,26 +50,29 @@
 			<FaceGrinOutline class="h-6 w-6" />
 		</ToolbarButton>
 		<Textarea
+			name="text"
+			placeholder="Message"
+			rows={1}
 			class="mx-4 w-full resize-none overflow-hidden bg-white dark:bg-gray-800"
 			classes={{ div: 'w-full' }}
-			rows={1}
-			placeholder="Message"
-			oninput={(event) => {
-				event.target.style.height = '0px';
-				event.target.style.height = event.target.scrollHeight + 2 + 'px';
+			oninput={(e) => {
+				e.target.style.height = '0px';
+				e.target.style.height = e.target.scrollHeight + 2 + 'px';
 			}}
-			onkeypress={(event) => {
-				if (event.keyCode === 13 && !event.shiftKey) {
-					event.preventDefault();
+			onkeypress={(e) => {
+				if (e.keyCode === 13 && !e.shiftKey) {
+					e.preventDefault();
+
+					if (e.target.value === '') return;
 					form.requestSubmit();
 
-					event.target.value = '';
-					event.target.style.height = '0px';
-					event.target.style.height = event.target.scrollHeight + 2 + 'px';
+					e.target.value = '';
+					e.target.style.height = '0px';
+					e.target.style.height = e.target.scrollHeight + 2 + 'px';
 				}
 			}}
 		/>
-		<ToolbarButton type="submit" color="primary" class="ml-6 rounded-full mb-1.5">
+		<ToolbarButton type="submit" color="primary" class="ml-6 mb-1.5 rounded-full">
 			<PaperPlaneOutline class="h-6 w-6 rotate-45" />
 		</ToolbarButton>
 	</form>
