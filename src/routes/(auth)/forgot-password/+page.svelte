@@ -14,7 +14,7 @@
 		<InputAddon>
 			<UserOutline class="h-6 w-6" />
 		</InputAddon>
-		<Input name="username" required placeholder={$locale.forgotPassword.username} />
+		<Input name="username" placeholder={$locale.forgotPassword.username} required />
 	</ButtonGroup>
 
 	{#snippet button()}

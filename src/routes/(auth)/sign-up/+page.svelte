@@ -14,14 +14,14 @@
 		<InputAddon>
 			<UserOutline class="h-6 w-6" />
 		</InputAddon>
-		<Input name="username" required placeholder={$locale.signUp.username} />
+		<Input name="username" placeholder={$locale.signUp.username} required />
 	</ButtonGroup>
 
 	<ButtonGroup class="w-full mt-4 mb-4">
 		<InputAddon>
 			<EnvelopeOutline class="h-6 w-6" />
 		</InputAddon>
-		<Input name="email" type="email" required placeholder={$locale.signUp.email} />
+		<Input type="email" name="email" placeholder={$locale.signUp.email} required />
 	</ButtonGroup>
 
 	<Checkbox>{$locale.signUp.terms}</Checkbox>
@@ -33,5 +33,5 @@
 
 <p class="text-sm mt-4">
 	{$locale.signUp.questionUsername}
-	<a class="text-primary-600" href="/sign-in">{$locale.signIn.action}</a>
+	<a href="/sign-in" class="text-primary-600">{$locale.signIn.action}</a>
 </p>

@@ -18,7 +18,7 @@
 		<InputAddon>
 			<UserOutline class="h-6 w-6" />
 		</InputAddon>
-		<Input name="username" required placeholder={$locale.signIn.username} />
+		<Input name="username" placeholder={$locale.signIn.username} required />
 	</ButtonGroup>
 
 	<ButtonGroup class="w-full mt-4">
@@ -32,15 +32,15 @@
 			</button>
 		</InputAddon>
 		<Input
+            type={showPassword ? 'text' : 'password'}
 			name="password"
-			type={showPassword ? 'text' : 'password'}
-			required
 			placeholder="Password"
+            required
 		/>
 	</ButtonGroup>
 	<p class="text-sm mt-4">
 		{$locale.signIn.questionPassword}
-		<a class="text-primary-600" href="/forgot-password">{$locale.forgotPassword.action}</a>
+		<a href="/forgot-password" class="text-primary-600">{$locale.forgotPassword.action}</a>
 	</p>
 
 	{#snippet button()}
@@ -50,5 +50,5 @@
 
 <p class="text-sm mt-4">
 	{$locale.signIn.questionUsername}
-	<a class="text-primary-600" href="/sign-up">{$locale.signUp.action}</a>
+	<a href="/sign-up" class="text-primary-600">{$locale.signUp.action}</a>
 </p>

@@ -1,10 +1,10 @@
-import { signIn } from '$lib/auth';
+import { signIn } from '$lib/auth.server';
 import type { Actions, PageServerLoad } from './$types';
 import { CredentialsSignin } from '@auth/core/errors';
 import { fail, redirect } from '@sveltejs/kit';
 
 export const load: PageServerLoad = async (event) => {
-	// Already authenticated
+	// already authenticated
 	if ((await event.locals.auth())?.user) redirect(303, '/');
 };
 

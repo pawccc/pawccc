@@ -15,11 +15,11 @@
 			<LockOutline class="h-6 w-6" />
 		</InputAddon>
 		<Input
+            type="password"
 			name="password"
-			type="password"
 			autocomplete="new-password"
+            placeholder={$locale.changePassword.password}
 			required
-			placeholder={$locale.changePassword.password}
 		/>
 	</ButtonGroup>
 	<ButtonGroup class="w-full mt-4">
@@ -29,8 +29,8 @@
 		<Input
 			type="password"
 			autocomplete="new-password"
-			required
 			placeholder={$locale.changePassword.passwordRepeat}
+            required
 		/>
 	</ButtonGroup>
 

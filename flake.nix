@@ -11,10 +11,21 @@
       in
       {
         devShell = with pkgs; mkShell {
-          buildInputs = [
+          nativeBuildInputs = [
+            cargo
+            rustc
+            rustfmt
+            rust-analyzer
+
             nodejs
             bun
             svelte-language-server
+          ];
+
+          buildInputs = [
+            pkg-config
+            openssl
+            openssl.dev
           ];
         };
       }

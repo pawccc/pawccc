@@ -1,8 +1,9 @@
-import { handle as handleAuth } from '$lib/auth';
+import { handle as auth } from '$lib/auth.server';
 import { all, default as cur } from '$lib/locales';
+import type { Handle } from '@sveltejs/kit';
 import { sequence } from '@sveltejs/kit/hooks';
 
-export const handle = sequence(async ({ event, resolve }) => {
+const i18n: Handle = async ({ event, resolve }) => {
 	const lang =
 		(event.request.headers.get('accept-language')?.split(',') ?? [])
 			.map((e) => {
@@ -16,4 +17,6 @@ export const handle = sequence(async ({ event, resolve }) => {
 	return resolve(event, {
 		transformPageChunk: ({ html }) => html.replace('%lang%', lang)
 	});
-}, handleAuth);
+};
+
+export const handle = sequence(i18n, auth);

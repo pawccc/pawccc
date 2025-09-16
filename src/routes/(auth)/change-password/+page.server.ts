@@ -3,7 +3,7 @@ import { fail, redirect } from '@sveltejs/kit';
 import { password, sql } from 'bun';
 
 export const load: PageServerLoad = async (event) => {
-	// Already authenticated
+	// already authenticated
 	if ((await event.locals.auth())?.user) redirect(303, '/');
 };
 
