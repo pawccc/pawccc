@@ -1,28 +1,8 @@
 <script lang="ts">
-	import { page } from '$app/state';
 	import { ToolbarButton, Textarea, Avatar } from 'flowbite-svelte';
 	import { ImageOutline, FaceGrinOutline, PaperPlaneOutline } from 'flowbite-svelte-icons';
 
-	let ws: WebSocket;
 	const messages = $state([]);
-
-	$effect(() => {
-		ws = new WebSocket(`ws://${location.host}/`);
-		ws.addEventListener('message', (evt) => {
-			const event = JSON.parse(evt.data);
-			if (event.event === 'Chat' && event.id == page.params.chat) {
-				messages.push(...event.messages);
-			}
-		});
-		ws.addEventListener('open', () => {
-			ws.send(
-				JSON.stringify({
-					event: 'OpenChat',
-					id: Number(page.params.chat)
-				})
-			);
-		});
-	});
 </script>
 
 <svelte:head>
@@ -71,13 +51,6 @@
 					evt.preventDefault();
 
 					if (evt.target.value === '') return;
-					ws.send(
-						JSON.stringify({
-							event: 'SendChat',
-							id: Number(page.params.chat),
-							text: evt.target.value
-						})
-					);
 
 					evt.target.value = '';
 					evt.target.style.height = '0px';

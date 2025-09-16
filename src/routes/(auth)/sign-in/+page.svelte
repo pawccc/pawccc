@@ -32,10 +32,10 @@
 			</button>
 		</InputAddon>
 		<Input
-            type={showPassword ? 'text' : 'password'}
+			type={showPassword ? 'text' : 'password'}
 			name="password"
 			placeholder="Password"
-            required
+			required
 		/>
 	</ButtonGroup>
 	<p class="text-sm mt-4">

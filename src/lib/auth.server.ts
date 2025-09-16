@@ -21,7 +21,12 @@ export const { handle, signIn, signOut } = SvelteKitAuth({
 			authorize: async (credentials) => {
 				const [user] =
 					await sql`SELECT id, password FROM "user" WHERE username = ${credentials.username}`;
-				if (!user || !user.password || !(await password.verify(credentials.password, user.password))) return null;
+				if (
+					!user ||
+					!user.password ||
+					!(await password.verify(credentials.password, user.password))
+				)
+					return null;
 
 				return {
 					id: user.id
@@ -39,11 +44,6 @@ export const { handle, signIn, signOut } = SvelteKitAuth({
 				id: token.sub
 			};
 			return session;
-		}
-	},
-	cookies: {
-		sessionToken: {
-			name: 'auth'
 		}
 	}
 });

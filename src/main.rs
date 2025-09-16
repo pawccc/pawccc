@@ -15,11 +15,13 @@ use tokio::{
     sync::mpsc,
 };
 use tokio_tungstenite::{
-    accept_hdr_async,
+    accept_hdr_async_with_config,
     tungstenite::{
         self, Message,
         handshake::server::{ErrorResponse, Request, Response},
         http::StatusCode,
+        protocol::WebSocketConfig,
+        extensions::{ExtensionsConfig, compression::deflate::DeflateConfig},
     },
 };
 
@@ -40,8 +42,8 @@ struct Server {
 impl Server {
     async fn new() -> Arc<Self> {
         let ikm = std::env::var("AUTH_SECRET").unwrap();
-        let salt = b"auth";
-        let info = b"Auth.js Generated Encryption Key (auth)";
+        let salt = b"authjs.session-token";
+        let info = b"Auth.js Generated Encryption Key (authjs.session-token)";
 
         let hk = Hkdf::<Sha256>::new(Some(salt), ikm.as_bytes());
         let mut okm = [0u8; 64];
@@ -76,7 +78,11 @@ impl Server {
 
     async fn handle(self: Arc<Self>, stream: TcpStream) {
         let mut session_token: Option<JwtPayload> = None;
-        let mut ws_stream = accept_hdr_async(
+
+        let mut ws_config = WebSocketConfig::default();
+        ws_config.extensions = ExtensionsConfig::default();
+        ws_config.extensions.permessage_deflate = Some(DeflateConfig::default());
+        let mut ws_stream = accept_hdr_async_with_config(
             stream,
             |request: &Request, response: Response| -> Result<Response, ErrorResponse> {
                 let cookies = request
@@ -97,7 +103,7 @@ impl Server {
                     let Some((name, value)) = cookie.split_once('=') else {
                         continue;
                     };
-                    if name == "auth" {
+                    if name == "authjs.session-token" {
                         session_token = Some(
                             jwt::decode_with_decrypter(value, &self.jwe_decrypter)
                                 .or(Err(Response::builder()
@@ -111,6 +117,7 @@ impl Server {
 
                 Ok(response)
             },
+            Some(ws_config),
         )
         .await
         .unwrap();
