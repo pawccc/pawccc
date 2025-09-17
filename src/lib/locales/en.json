@@ -8,7 +8,7 @@
 	},
 	"forgotPassword": {
 		"title": "Forgot your password?",
-        "description": "Enter your username and we'll send you a link to reset your password.",
+		"description": "Enter your username and we'll send you a link to reset your password.",
 		"username": "Username",
 		"action": "Change password"
 	},

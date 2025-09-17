@@ -9,9 +9,9 @@
 </svelte:head>
 
 <Form>
-    <h1 class="text-xl font-bold">{$locale.changePassword.title}</h1>
+	<h1 class="text-xl font-bold">{$locale.changePassword.title}</h1>
 
-    <ButtonGroup class="mt-4 w-full">
+	<ButtonGroup class="mt-4 w-full">
 		<InputAddon>
 			<span class="fa fa-fw fa-lg fa-lock"></span>
 		</InputAddon>

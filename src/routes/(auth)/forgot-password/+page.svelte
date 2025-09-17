@@ -11,8 +11,7 @@
 <Form>
 	<h1 class="text-xl font-bold">{$locale.forgotPassword.title}</h1>
 	<p class="mt-2 text-sm">
-        {$locale.forgotPassword.description}
-
+		{$locale.forgotPassword.description}
 	</p>
 
 	<ButtonGroup class="mt-4 w-full">

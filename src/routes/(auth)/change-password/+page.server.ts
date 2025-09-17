@@ -17,7 +17,9 @@ export const actions: Actions = {
 		const _password = data.get('password');
 		if (!_password) return fail(400);
 
-		await sql`UPDATE "user" SET password = ${await password.hash(_password)},passcode = null WHERE passcode = ${passcode}`;
+		let [user] =
+			await sql`UPDATE "user" SET password = ${await password.hash(_password)}, passcode = null WHERE passcode = ${passcode} RETURNING id`;
+		if (!user) return fail(400);
 
 		redirect(303, '/sign-in');
 	}
