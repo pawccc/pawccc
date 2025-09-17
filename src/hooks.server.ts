@@ -1,7 +1,8 @@
-import { handle as auth } from '$lib/auth.server';
-import { all, default as cur } from '$lib/locales';
 import type { Handle } from '@sveltejs/kit';
 import { sequence } from '@sveltejs/kit/hooks';
+
+import { handle as auth } from '$lib/auth.server';
+import { all, default as cur } from '$lib/locales';
 
 const i18n: Handle = async ({ event, resolve }) => {
 	const lang =

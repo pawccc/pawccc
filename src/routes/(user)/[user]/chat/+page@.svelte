@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { ToolbarButton, Textarea, Avatar } from 'flowbite-svelte';
+	import { Avatar, Textarea, ToolbarButton } from 'flowbite-svelte';
 
 	const messages = $state([]);
 </script>

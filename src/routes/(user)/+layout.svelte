@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { BottomNav, BottomNavItem, Avatar } from 'flowbite-svelte';
+	import { Avatar, BottomNav, BottomNavItem } from 'flowbite-svelte';
 
 	let { children } = $props();
 </script>

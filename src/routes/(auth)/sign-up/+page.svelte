@@ -1,11 +1,15 @@
 <script lang="ts">
+	import { ButtonGroup, Checkbox, Input, InputAddon } from 'flowbite-svelte';
+
+	import { resolve } from '$app/paths';
+
 	import locale from '$lib/locales';
+
 	import Form from '../Form.svelte';
-	import { Checkbox, Input, ButtonGroup, InputAddon } from 'flowbite-svelte';
 </script>
 
 <svelte:head>
-	<title>{$locale.signUp.title}</title>
+	<title>{$locale.signUp.title} • pawc.cc</title>
 </svelte:head>
 
 <Form>
@@ -23,7 +27,7 @@
 		<Input type="email" name="email" placeholder={$locale.signUp.email} required />
 	</ButtonGroup>
 
-	<Checkbox>{$locale.signUp.terms}</Checkbox>
+	<Checkbox required>{$locale.signUp.terms}</Checkbox>
 
 	{#snippet button()}
 		{$locale.signUp.action}
@@ -32,5 +36,5 @@
 
 <p class="mt-4 text-sm">
 	{$locale.signUp.questionUsername}
-	<a href="/sign-in" class="text-primary-600">{$locale.signIn.action}</a>
+	<a href={resolve('/sign-in')} class="text-primary-600">{$locale.signIn.action}</a>
 </p>

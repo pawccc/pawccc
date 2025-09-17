@@ -9,8 +9,7 @@
 	"forgotPassword": {
 		"title": "Passwort vergessen?",
 		"description": "Gebe deinen Nutzername ein, und wir senden dir einen Link zum Zurücksetzen deines Passworts.",
-		"username": "Nutzername",
-		"action": "Passwort ändern"
+		"username": "Nutzername"
 	},
 	"signIn": {
 		"title": "Anmeldung",

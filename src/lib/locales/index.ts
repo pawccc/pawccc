@@ -1,7 +1,9 @@
-import { browser } from '$app/environment';
+import { writable } from 'svelte/store';
+
 import de from './de.json';
 import en from './en.json';
-import { writable } from 'svelte/store';
+
+import { browser } from '$app/environment';
 
 export const all = {
 	de,

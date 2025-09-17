@@ -1,11 +1,13 @@
 <script lang="ts">
+	import { ButtonGroup, Input, InputAddon } from 'flowbite-svelte';
+
 	import locale from '$lib/locales';
+
 	import Form from '../Form.svelte';
-	import { Input, ButtonGroup, InputAddon } from 'flowbite-svelte';
 </script>
 
 <svelte:head>
-	<title>{$locale.changePassword.title}</title>
+	<title>{$locale.changePassword.title} • pawc.cc</title>
 </svelte:head>
 
 <Form>

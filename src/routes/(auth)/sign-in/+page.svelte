@@ -1,13 +1,17 @@
 <script lang="ts">
+	import { ButtonGroup, Input, InputAddon } from 'flowbite-svelte';
+
+	import { resolve } from '$app/paths';
+
 	import locale from '$lib/locales';
+
 	import Form from '../Form.svelte';
-	import { Input, ButtonGroup, InputAddon, Toast } from 'flowbite-svelte';
 
 	let showPassword = $state(false);
 </script>
 
 <svelte:head>
-	<title>{$locale.signIn.title}</title>
+	<title>{$locale.signIn.title} • pawc.cc</title>
 </svelte:head>
 
 <Form>
@@ -35,7 +39,9 @@
 	</ButtonGroup>
 	<p class="mt-4 text-sm">
 		{$locale.signIn.questionPassword}
-		<a href="/forgot-password" class="text-primary-600">{$locale.forgotPassword.action}</a>
+		<a href={resolve('/forgot-password')} class="text-primary-600">
+			{$locale.changePassword.action}
+		</a>
 	</p>
 
 	{#snippet button()}
@@ -45,5 +51,5 @@
 
 <p class="mt-4 text-sm">
 	{$locale.signIn.questionUsername}
-	<a href="/sign-up" class="text-primary-600">{$locale.signUp.action}</a>
+	<a href={resolve('/sign-up')} class="text-primary-600">{$locale.signUp.action}</a>
 </p>

@@ -1,7 +1,9 @@
 <script lang="ts">
-	import { enhance } from '$app/forms';
-	import { Button } from 'flowbite-svelte';
 	import type { Snippet } from 'svelte';
+
+	import { Button } from 'flowbite-svelte';
+
+	import { enhance } from '$app/forms';
 
 	let { children, button }: { children: Snippet; button: Snippet } = $props();
 

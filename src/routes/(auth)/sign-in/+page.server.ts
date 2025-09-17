@@ -1,7 +1,9 @@
-import { signIn } from '$lib/auth.server';
+import { fail, redirect } from '@sveltejs/kit';
+
 import type { Actions, PageServerLoad } from './$types';
 import { CredentialsSignin } from '@auth/core/errors';
-import { fail, redirect } from '@sveltejs/kit';
+
+import { signIn } from '$lib/auth.server';
 
 export const load: PageServerLoad = async (event) => {
 	// already authenticated

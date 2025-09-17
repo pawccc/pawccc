@@ -1,11 +1,13 @@
 <script lang="ts">
+	import { ButtonGroup, Input, InputAddon } from 'flowbite-svelte';
+
 	import locale from '$lib/locales';
+
 	import Form from '../Form.svelte';
-	import { Input, ButtonGroup, InputAddon } from 'flowbite-svelte';
 </script>
 
 <svelte:head>
-	<title>{$locale.forgotPassword.title}</title>
+	<title>{$locale.forgotPassword.title} • pawc.cc</title>
 </svelte:head>
 
 <Form>
@@ -22,6 +24,6 @@
 	</ButtonGroup>
 
 	{#snippet button()}
-		{$locale.forgotPassword.action}
+		{$locale.changePassword.action}
 	{/snippet}
 </Form>

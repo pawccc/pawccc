@@ -1,6 +1,12 @@
-import type { Actions, PageServerLoad } from './$types';
-import { fail, redirect } from '@sveltejs/kit';
 import { sql } from 'bun';
+
+import { fail, redirect } from '@sveltejs/kit';
+
+import type { Actions, PageServerLoad } from './$types';
+
+import { PUBLIC_AUTH_PASSCODE_EXPIRY } from '$env/static/public';
+
+import ChangePassword from '$lib/emails/ChangePassword.svelte';
 import { sendMail } from '$lib/send.server';
 
 export const load: PageServerLoad = async (event) => {
@@ -13,19 +19,27 @@ export const actions: Actions = {
 		const data = await request.formData();
 
 		const username = data.get('username');
-		if (!username) return fail(400);
+		if (typeof username !== 'string') return fail(400);
 
-		const [{ passcode, email }] =
-			await sql`UPDATE "user" SET passcode = DEFAULT, passcode_date = DEFAULT WHERE username = ${username} RETURNING passcode, email`;
-		if (!passcode) return fail(400);
+		const [user] = await sql`UPDATE "user"
+								             SET passcode      = DEFAULT,
+									 	             passcode_date = DEFAULT
+								             WHERE username = ${username}
+									             AND (passcode IS NULL OR passcode_date + INTERVAL ${PUBLIC_AUTH_PASSCODE_EXPIRY} < now())
+								             RETURNING email, passcode`;
+		if (!user) return fail(400);
 
-		console.log(passcode);
-		await sendMail({
-			from: 'pawc.cc <no-reply@pawc.cc>',
-			to: email,
-			subject: 'Change Password',
-			html: `<a href="https://pawc.cc/change-password?passcode=${passcode}">Change Password</a>`
-		});
+		await sendMail(
+			{
+				from: 'pawc.cc <no-reply@pawc.cc>',
+				to: user.email,
+				subject: 'Reset Password'
+			},
+			ChangePassword,
+			{
+				passcode: user.passcode
+			}
+		);
 
 		redirect(303, '/sign-in');
 	}
