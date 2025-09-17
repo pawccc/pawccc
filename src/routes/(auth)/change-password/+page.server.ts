@@ -11,16 +11,13 @@ export const actions: Actions = {
 	default: async ({ request, url }) => {
 		const data = await request.formData();
 
-		const otp = url.searchParams.get('otp');
-		if (!otp) return fail(400);
+		const passcode = url.searchParams.get('passcode');
+		if (!passcode) return fail(400);
 
-		const [{ user }] = await sql`DELETE FROM user_otp WHERE password = ${otp} RETURNING "user"`;
-		if (!user) return fail(400);
+		const _password = data.get('password');
+		if (!_password) return fail(400);
 
-		const pwd = data.get('password');
-		if (!pwd) return fail(400);
-
-		await sql`UPDATE "user" SET password = ${await password.hash(pwd)} WHERE id = ${user}`;
+		await sql`UPDATE "user" SET password = ${await password.hash(_password)},passcode = null WHERE passcode = ${passcode}`;
 
 		redirect(303, '/sign-in');
 	}

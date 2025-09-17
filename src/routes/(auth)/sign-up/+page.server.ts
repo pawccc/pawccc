@@ -21,17 +21,6 @@ export const actions: Actions = {
 			await sql`INSERT INTO "user" (email, username) VALUES (${email}, ${username}) ON CONFLICT DO NOTHING RETURNING id`;
 		if (!user) return fail(400);
 
-		const password = getRandomAlphanumericString(8);
-		const expiresAt = new Date(Date.now() + 60 * 60 * 1000);
-		await sql`INSERT INTO user_otp ("user", password, expires_at) VALUES (${user.id}, ${password}, ${expiresAt})`;
-
 		redirect(303, '/sign-in');
 	}
 };
-
-function getRandomAlphanumericString(length: number): string {
-	const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-	const array = new Uint32Array(length);
-	crypto.getRandomValues(array);
-	return Array.from(array, (x) => chars[x % chars.length]).join('');
-}
