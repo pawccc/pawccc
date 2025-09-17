@@ -4,7 +4,7 @@ import { fail, redirect } from '@sveltejs/kit';
 
 import type { Actions, PageServerLoad } from './$types';
 
-import ChangePassword from '$lib/emails/ChangePassword.svelte';
+import ChangePassword from '$lib/letters/ChangePassword.svelte';
 import { sendMail } from '$lib/send.server';
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -35,7 +35,7 @@ export const actions: Actions = {
 			{
 				from: 'pawc.cc <no-reply@pawc.cc>',
 				to: email,
-				subject: 'Reset Password'
+				subject: 'Change password request'
 			},
 			ChangePassword,
 			{

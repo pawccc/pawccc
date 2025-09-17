@@ -22,16 +22,16 @@ export const sendMail = async <
 	Props extends ComponentProps<Comp> = ComponentProps<Comp>
 >(
 	mailOptions: Mail.Options,
-	component: Comp extends SvelteComponent<any> ? ComponentType<Comp> : Comp,
+	comp: Comp extends SvelteComponent<any> ? ComponentType<Comp> : Comp,
 	props: Omit<Props, '$$slots' | '$$events'>
 ) => {
-	const { head, body } = render(component, { props });
-
-	const mjml = `<mjml>
+	const { head, body } = render(comp, { props });
+	const { html } = mjml2html(
+		`<mjml lang="en">
     <mj-head>${head}</mj-head>
     <mj-body background-color="#f6f6f6">${body}</mj-body>
-  </mjml>`;
-	const { html } = mjml2html(mjml);
-
+  </mjml>`,
+		{ minify: true }
+	); // FIXME code
 	await transporter.sendMail({ html, ...mailOptions });
 };

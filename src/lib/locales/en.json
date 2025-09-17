@@ -1,10 +1,17 @@
 {
+	"code": "en",
 	"name": "🇬🇧 English",
 	"changePassword": {
 		"title": "Change your password",
 		"password": "Password",
 		"passwordRepeat": "Repeat password",
-		"action": "Change password"
+		"action": "Change password",
+		"letter": {
+			"subject": "Change password request",
+			"content": "<mj-text>Hello,</mj-text><mj-text>We received a request to change the password for your account.<br />If you made this request, click the button below to set a new password:</mj-text><mj-button href=\"https://pawc.cc/change-password?passcode={passcode}\">Change password</mj-button><mj-text>For your security, this link will expire in {passcode_expiry}<br />If you didn’t request a password reset, you can safely ignore this email — your password will stay the same.</mj-text>",
+			"signature": "Thanks,<br />The pawc.cc Team",
+			"copyright": "Copyright (c) 2025, pawc.cc. All rights reserved."
+		}
 	},
 	"forgotPassword": {
 		"title": "Forgot your password?",

@@ -1,10 +1,17 @@
 {
+	"code": "de",
 	"name": "🇩🇪 Deutsch",
 	"changePassword": {
 		"title": "Passwort ändern",
 		"password": "Passwort",
 		"passwordRepeat": "Passwort wiederholen",
-		"action": "Passwort ändern"
+		"action": "Passwort ändern",
+		"letter": {
+			"subject": "Anfrage zum Passwort ändern",
+			"content": "<mj-text>Hallo,</mj-text><mj-text>Wir haben eine Anfrage erhalten, das Passwort für dein Konto zu ändern.<br />Wenn du diese Anfrage gestellt hast, klicke auf die Schaltfläche unten, um ein neues Passwort festzulegen:</mj-text><mj-button href=\"https://pawc.cc/change-password?passcode={passcode}\">Passwort ändern</mj-button><mj-text>Aus Sicherheitsgründen läuft dieser Link nach {passcode_expiry} ab.<br />Wenn du keine Passwortänderung angefordert hast, kannst du diese E-Mail einfach ignorieren — dein Passwort bleibt unverändert.</mj-text>",
+			"signature": "Danke,<br />Das pawc.cc Team",
+			"copyright": "Copyright (c) 2025, pawc.cc. Alle Rechte vorbehalten."
+		}
 	},
 	"forgotPassword": {
 		"title": "Passwort vergessen?",
