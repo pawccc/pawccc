@@ -1,8 +1,7 @@
 <script lang="ts">
 	import locale from '$lib/locales';
 	import Form from '../Form.svelte';
-	import { Input, ButtonGroup, InputAddon } from 'flowbite-svelte';
-	import { EyeOutline, EyeSlashOutline, UserOutline } from 'flowbite-svelte-icons';
+	import { Input, ButtonGroup, InputAddon, Toast } from 'flowbite-svelte';
 
 	let showPassword = $state(false);
 </script>
@@ -16,19 +15,15 @@
 
 	<ButtonGroup class="w-full">
 		<InputAddon>
-			<UserOutline class="h-6 w-6" />
+			<span class="fa fa-fw fa-lg fa-user"></span>
 		</InputAddon>
 		<Input name="username" placeholder={$locale.signIn.username} required />
 	</ButtonGroup>
 
-	<ButtonGroup class="w-full mt-4">
+	<ButtonGroup class="mt-4 w-full">
 		<InputAddon>
 			<button type="button" tabindex="-1" onclick={() => (showPassword = !showPassword)}>
-				{#if showPassword}
-					<EyeOutline class="h-6 w-6" />
-				{:else}
-					<EyeSlashOutline class="h-6 w-6" />
-				{/if}
+				<span class={{ 'fa fa-fw fa-lg fa-eye': true, 'fa-eye-slash': showPassword }}></span>
 			</button>
 		</InputAddon>
 		<Input
@@ -38,7 +33,7 @@
 			required
 		/>
 	</ButtonGroup>
-	<p class="text-sm mt-4">
+	<p class="mt-4 text-sm">
 		{$locale.signIn.questionPassword}
 		<a href="/forgot-password" class="text-primary-600">{$locale.forgotPassword.action}</a>
 	</p>
@@ -48,7 +43,7 @@
 	{/snippet}
 </Form>
 
-<p class="text-sm mt-4">
+<p class="mt-4 text-sm">
 	{$locale.signIn.questionUsername}
 	<a href="/sign-up" class="text-primary-600">{$locale.signUp.action}</a>
 </p>

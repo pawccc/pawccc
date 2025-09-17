@@ -24,7 +24,7 @@
 >
 	{@render children()}
 
-	<Button type="submit" class={{ 'w-full mt-10': true, 'animation-shake': failure }} {loading}>
+	<Button type="submit" class={{ 'mt-10 w-full': true, 'animation-shake': failure }} {loading}>
 		{@render button()}
 	</Button>
 </form>

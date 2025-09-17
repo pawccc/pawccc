@@ -12,17 +12,6 @@ CREATE TABLE "user"
     password   TEXT
 );
 
-CREATE TABLE user_otp
-(
-    id         BIGINT GENERATED ALWAYS AS IDENTITY
-        PRIMARY KEY,
-
-    "user"     BIGINT    NOT NULL
-        REFERENCES "user",
-    password   TEXT      NOT NULL,
-    expires_at TIMESTAMP NOT NULL
-);
-
 CREATE TABLE chat
 (
     id BIGINT GENERATED ALWAYS AS IDENTITY

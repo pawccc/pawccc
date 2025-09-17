@@ -1,5 +1,8 @@
 @import 'tailwindcss';
 
+@import 'fontawesome-free/css/fontawesome.css';
+@import 'fontawesome-free/css/solid.css';
+
 @plugin 'flowbite/plugin';
 
 @theme {

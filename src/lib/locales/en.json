@@ -1,13 +1,14 @@
 {
 	"name": "🇬🇧 English",
 	"changePassword": {
-		"title": "Change password",
+		"title": "Change your password",
 		"password": "Password",
 		"passwordRepeat": "Repeat password",
 		"action": "Change password"
 	},
 	"forgotPassword": {
-		"title": "Forgot password",
+		"title": "Forgot your password?",
+        "description": "Enter your username and we'll send you a link to reset your password.",
 		"username": "Username",
 		"action": "Change password"
 	},

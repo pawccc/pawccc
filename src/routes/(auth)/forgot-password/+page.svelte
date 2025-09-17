@@ -2,7 +2,6 @@
 	import locale from '$lib/locales';
 	import Form from '../Form.svelte';
 	import { Input, ButtonGroup, InputAddon } from 'flowbite-svelte';
-	import { UserOutline } from 'flowbite-svelte-icons';
 </script>
 
 <svelte:head>
@@ -10,9 +9,15 @@
 </svelte:head>
 
 <Form>
-	<ButtonGroup class="w-full">
+	<h1 class="text-xl font-bold">{$locale.forgotPassword.title}</h1>
+	<p class="mt-2 text-sm">
+        {$locale.forgotPassword.description}
+
+	</p>
+
+	<ButtonGroup class="mt-4 w-full">
 		<InputAddon>
-			<UserOutline class="h-6 w-6" />
+			<span class="fa fa-fw fa-lg fa-user"></span>
 		</InputAddon>
 		<Input name="username" placeholder={$locale.forgotPassword.username} required />
 	</ButtonGroup>

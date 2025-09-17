@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { ToolbarButton, Textarea, Avatar } from 'flowbite-svelte';
-	import { ImageOutline, FaceGrinOutline, PaperPlaneOutline } from 'flowbite-svelte-icons';
 
 	const messages = $state([]);
 </script>
@@ -9,18 +8,18 @@
 	<title></title>
 </svelte:head>
 
-<div class="flex flex-col h-screen max-w-7xl mx-auto">
+<div class="mx-auto flex h-screen max-w-7xl flex-col">
 	<div class="flex-1 overflow-y-scroll">
 		{#each messages as message (message.id)}
 			<div class="flex items-start gap-2.5">
 				<Avatar />
-				<div class="flex flex-col w-full max-w-[320px] leading-1.5">
+				<div class="flex w-full max-w-[320px] flex-col leading-1.5">
 					<div class="flex items-center space-x-2 rtl:space-x-reverse">
 						<span class="text-sm font-semibold text-gray-900 dark:text-white">{message.user}</span>
 						<span class="text-sm font-normal text-gray-500 dark:text-gray-400">{message.date}</span>
 					</div>
 					<p
-						class="text-sm font-normal py-2 mb-1 rounded-e-xl rounded-es-xl text-gray-900 dark:text-white p-4 border-gray-200 bg-gray-100 dark:bg-gray-700"
+						class="mb-1 rounded-e-xl rounded-es-xl border-gray-200 bg-gray-100 p-4 py-2 text-sm font-normal text-gray-900 dark:bg-gray-700 dark:text-white"
 					>
 						{message.text}
 					</p>
@@ -29,12 +28,12 @@
 		{/each}
 	</div>
 
-	<div class="flex items-end rounded-lg px-3 py-2 bg-gray-50 dark:bg-gray-700">
-		<ToolbarButton color="dark" class="text-gray-500 dark:text-gray-400 mb-1.5">
-			<ImageOutline class="h-6 w-6" />
+	<div class="flex items-end rounded-lg bg-gray-50 px-3 py-2 dark:bg-gray-700">
+		<ToolbarButton color="dark" class="mb-1.5 text-gray-500 dark:text-gray-400">
+			<span class="fa fa-fw fa-lg fa-image"></span>
 		</ToolbarButton>
-		<ToolbarButton color="dark" class="text-gray-500 dark:text-gray-400 mb-1.5">
-			<FaceGrinOutline class="h-6 w-6" />
+		<ToolbarButton color="dark" class="mb-1.5 text-gray-500 dark:text-gray-400">
+			<span class="fa fa-fw fa-lg fa-grin"></span>
 		</ToolbarButton>
 		<Textarea
 			name="text"
@@ -58,8 +57,8 @@
 				}
 			}}
 		/>
-		<ToolbarButton type="submit" color="primary" class="ml-6 mb-1.5 rounded-full">
-			<PaperPlaneOutline class="h-6 w-6 rotate-45" />
+		<ToolbarButton type="submit" color="primary" class="mb-1.5 ml-6 rounded-full">
+			<span class="fa fa-fw fa-lg fa-paper-plane"></span>
 		</ToolbarButton>
 	</div>
 </div>
