@@ -5,7 +5,7 @@ import { fail, redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 
 import ChangePassword from '$lib/letters/ChangePassword.svelte';
-import { sendMail } from '$lib/send.server';
+import { sendEmail } from '$lib/send.server';
 
 export const load: PageServerLoad = async (event) => {
 	if ((await event.locals.auth())?.user) redirect(303, '/');
@@ -26,17 +26,9 @@ export const actions: Actions = {
 								             RETURNING email, passcode`; // FIXME PUBLIC_AUTH_PASSCODE_EXPIRY
 		if (!user) return fail(400);
 
-		await sendMail(
-			{
-				from: 'pawc.cc <no-reply@pawc.cc>',
-				to: user.email,
-				subject: 'Change password request' // FIXME changePassword.letter.subject
-			},
-			ChangePassword,
-			{
-				passcode: user.passcode
-			}
-		);
+		await sendEmail(user.email, ChangePassword, {
+			passcode: user.passcode
+		});
 
 		redirect(303, '/sign-in');
 	}

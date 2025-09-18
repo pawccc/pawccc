@@ -3,7 +3,6 @@ import { render } from 'svelte/server';
 
 import mjml2html from 'mjml';
 import nodemailer from 'nodemailer';
-import Mail from 'nodemailer/lib/mailer';
 
 import { env } from '$env/dynamic/private';
 
@@ -17,18 +16,21 @@ const transporter = nodemailer.createTransport({
 	port: 465
 });
 
-export const sendMail = async <
+export const sendEmail = async <
 	Comp extends SvelteComponent<any> | Component<any>,
 	Props extends ComponentProps<Comp> = ComponentProps<Comp>
 >(
-	mailOptions: Mail.Options,
+	to: string,
+
 	comp: Comp extends SvelteComponent<any> ? ComponentType<Comp> : Comp,
 	props: Omit<Props, '$$slots' | '$$events'>
 ) => {
-	const { head, body } = render(comp, { props });
-	const { html } = mjml2html(`<mjml lang="en">
-    <mj-head>${head}</mj-head>
-    <mj-body background-color="#f6f6f6">${body}</mj-body>
-  </mjml>`); // FIXME lang
-	await transporter.sendMail({ html, ...mailOptions });
+	const { body } = render(comp, { props });
+	const { html, json } = await mjml2html(body);
+	await transporter.sendMail({
+		from: 'pawc.cc <no-reply@pawc.cc>',
+		to,
+		subject: json.attributes.subject,
+		html
+	});
 };

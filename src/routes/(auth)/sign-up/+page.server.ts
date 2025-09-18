@@ -5,7 +5,7 @@ import { fail, redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 
 import ChangePassword from '$lib/letters/ChangePassword.svelte';
-import { sendMail } from '$lib/send.server';
+import { sendEmail } from '$lib/send.server';
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const usernameRegex = /^[a-zA-Z0-9_]{2,16}$/;
@@ -30,17 +30,9 @@ export const actions: Actions = {
 												     RETURNING passcode`;
 		if (!user) return fail(400);
 
-		await sendMail(
-			{
-				from: 'pawc.cc <no-reply@pawc.cc>',
-				to: email,
-				subject: 'Change password request' // FIXME changePassword.letter.subject
-			},
-			ChangePassword,
-			{
-				passcode: user.passcode
-			}
-		);
+		await sendEmail(email, ChangePassword, {
+			passcode: user.passcode
+		});
 
 		redirect(303, '/sign-in');
 	}
