@@ -2,6 +2,7 @@
 	import { ButtonGroup, Input, InputAddon } from 'flowbite-svelte';
 
 	import { resolve } from '$app/paths';
+	import { page } from '$app/state';
 
 	import locale from '$lib/locales';
 
@@ -16,6 +17,7 @@
 
 <Form>
 	<input type="hidden" name="providerId" value="credentials" />
+	<input type="hidden" name="redirectTo" value={page.url.searchParams.get('redirectTo') ?? '/'} />
 
 	<ButtonGroup class="w-full">
 		<InputAddon>
@@ -26,14 +28,20 @@
 
 	<ButtonGroup class="mt-4 w-full">
 		<InputAddon>
-			<button type="button" tabindex="-1" onclick={() => (showPassword = !showPassword)}>
+			<button
+				type="button"
+				tabindex="-1"
+				onclick={() => (showPassword = !showPassword)}
+				aria-label={$locale.signIn.showPassword}
+				aria-pressed={showPassword}
+			>
 				<span class={{ 'fa fa-fw fa-lg fa-eye': true, 'fa-eye-slash': showPassword }}></span>
 			</button>
 		</InputAddon>
 		<Input
 			type={showPassword ? 'text' : 'password'}
 			name="password"
-			placeholder="Password"
+			placeholder={$locale.signIn.password}
 			required
 		/>
 	</ButtonGroup>

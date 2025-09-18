@@ -11,7 +11,7 @@ const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const usernameRegex = /^[a-zA-Z0-9_]{2,16}$/;
 
 export const load: PageServerLoad = async (event) => {
-	if ((await event.locals.auth())?.user) redirect(303, '/');
+	if ((await event.locals.auth())?.user) redirect(302, '/');
 };
 
 export const actions: Actions = {
@@ -34,6 +34,6 @@ export const actions: Actions = {
 			passcode: user.passcode
 		});
 
-		redirect(303, '/sign-in');
+		redirect(302, '/sign-in');
 	}
 };

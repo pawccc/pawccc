@@ -8,7 +8,7 @@ import ChangePassword from '$lib/letters/ChangePassword.svelte';
 import { sendEmail } from '$lib/send.server';
 
 export const load: PageServerLoad = async (event) => {
-	if ((await event.locals.auth())?.user) redirect(303, '/');
+	if ((await event.locals.auth())?.user) redirect(302, '/');
 };
 
 export const actions: Actions = {
@@ -30,6 +30,6 @@ export const actions: Actions = {
 			passcode: user.passcode
 		});
 
-		redirect(303, '/sign-in');
+		redirect(302, '/sign-in');
 	}
 };

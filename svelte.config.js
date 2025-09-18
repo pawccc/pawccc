@@ -14,7 +14,7 @@ const config = {
 				'default-src': ['self'],
 				'img-src': ['self', 'data:'],
 				'object-src': ['none'],
-				'base-uri': ['self'],
+				'base-uri': ['none'],
 				'frame-ancestors': ['none'],
 				'trusted-types': ['none']
 			}

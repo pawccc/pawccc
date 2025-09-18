@@ -6,7 +6,7 @@ import { CredentialsSignin } from '@auth/core/errors';
 import { signIn } from '$lib/auth.server';
 
 export const load: PageServerLoad = async (event) => {
-	if ((await event.locals.auth())?.user) redirect(303, '/');
+	if ((await event.locals.auth())?.user) redirect(302, '/');
 };
 
 export const actions: Actions = {

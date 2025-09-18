@@ -24,6 +24,7 @@
 		"questionUsername": "Noch kein Konto?",
 		"password": "Passwort",
 		"questionPassword": "Passwort vergessen?",
+		"showPassword": "Passwort anzeigen",
 		"action": "Anmelden"
 	},
 	"signUp": {
