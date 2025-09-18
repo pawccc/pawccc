@@ -4,6 +4,6 @@ DROP TABLE chat_participant;
 
 DROP TABLE chat;
 
-DROP TABLE user_otp;
-
 DROP TABLE "user";
+
+DROP FUNCTION random_alphanumeric_string;

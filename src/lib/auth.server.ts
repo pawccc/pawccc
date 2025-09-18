@@ -3,14 +3,6 @@ import { password, sql } from 'bun';
 import Credentials from '@auth/core/providers/credentials';
 import { SvelteKitAuth } from '@auth/sveltekit';
 
-declare module '@auth/sveltekit' {
-	interface Session {
-		user: {
-			id: number;
-		};
-	}
-}
-
 export const { handle, signIn, signOut } = SvelteKitAuth({
 	trustHost: true,
 	providers: [
@@ -20,7 +12,7 @@ export const { handle, signIn, signOut } = SvelteKitAuth({
 				password: {}
 			},
 			authorize: async (credentials) => {
-				const [user] = await sql`SELECT id, password
+				const [user] = await sql`SELECT id, username, password
 										             FROM "user"
 									               WHERE username = ${credentials.username}`;
 				if (
@@ -31,7 +23,8 @@ export const { handle, signIn, signOut } = SvelteKitAuth({
 					return null;
 
 				return {
-					id: user.id
+					id: user.id,
+					name: user.username
 				};
 			}
 		})
@@ -42,10 +35,20 @@ export const { handle, signIn, signOut } = SvelteKitAuth({
 	},
 	callbacks: {
 		session: async ({ session, token }) => {
-			session.user = {
-				id: token.sub
-			};
+			if (token) {
+				session.user = {
+					id: token.uid,
+					name: token.sub
+				};
+			}
 			return session;
+		},
+		jwt: async ({ token, user }) => {
+			if (user) {
+				token.uid = user.id;
+				token.sub = user.name;
+			}
+			return token;
 		}
 	}
 });

@@ -1,11 +1,13 @@
 <script lang="ts">
 	import { Avatar, Textarea, ToolbarButton } from 'flowbite-svelte';
 
+	import { page } from '$app/state';
+
 	const messages = $state([]);
 </script>
 
 <svelte:head>
-	<title></title>
+	<title>{page.params.user} • pawc.cc</title>
 </svelte:head>
 
 <div class="mx-auto flex h-screen max-w-7xl flex-col">

@@ -1,0 +1,23 @@
+{
+  "short_name": "pawc.cc",
+  "name": "pawc.cc",
+  "icons": [
+    {
+      "src": "/web-app-manifest-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/web-app-manifest-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "id": "/",
+  "start_url": "/",
+  "background_color": "#FFFFFF",
+  "display": "standalone",
+  "scope": "/",
+  "theme_color": "#EB4F27",
+  "description": "pawc.cc"
+}

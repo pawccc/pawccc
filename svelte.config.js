@@ -13,9 +13,7 @@ const config = {
 			directives: {
 				'default-src': ['self'],
 				'img-src': ['self', 'data:'],
-				'object-src': ['none'],
-				'script-src': [],
-				'style-src': ['self']
+				'object-src': ['none']
 			}
 		}
 	}

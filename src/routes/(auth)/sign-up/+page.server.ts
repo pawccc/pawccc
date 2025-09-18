@@ -11,7 +11,6 @@ const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const usernameRegex = /^[a-zA-Z0-9_]{2,16}$/;
 
 export const load: PageServerLoad = async (event) => {
-	// already authenticated
 	if ((await event.locals.auth())?.user) redirect(303, '/');
 };
 
