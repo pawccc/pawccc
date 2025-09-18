@@ -13,7 +13,10 @@ const config = {
 			directives: {
 				'default-src': ['self'],
 				'img-src': ['self', 'data:'],
-				'object-src': ['none']
+				'object-src': ['none'],
+				'base-uri': ['self'],
+				'frame-ancestors': ['none'],
+				'trusted-types': ['none']
 			}
 		}
 	}
