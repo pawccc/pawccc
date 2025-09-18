@@ -15,9 +15,9 @@
   ],
   "id": "/",
   "start_url": "/",
-  "background_color": "#101828",
+  "background_color": "#18181b",
   "display": "standalone",
   "scope": "/",
-  "theme_color": "#ef562f",
+  "theme_color": "#009966",
   "description": "pawc.cc"
 }

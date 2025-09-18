@@ -9,15 +9,16 @@
 <mjml lang={$locale.code} subject={$locale.changePassword.letter.subject}>
 	<mj-head>
 		<mj-attributes>
-			<mj-all font-family="Open Sans, Helvetica, Arial, sans-serif" />
-			<mj-section padding="0" />
-			<mj-column padding="0" />
-			<mj-text font-size="16px" line-height="24px" color="#404242" />
-			<mj-button background-color="#eb4f27" color="white" font-size="16px" border-radius="4px" />
+			<mj-all font-family="Open Sans, Helvetica, Arial, sans-serif"></mj-all>
+			<mj-section padding="0"></mj-section>
+			<mj-column padding="0"></mj-column>
+			<mj-text font-size="16px" line-height="24px" color="#404242"></mj-text>
+			<mj-button background-color="#007a55" color="white" font-size="16px" border-radius="4px"
+			></mj-button>
 		</mj-attributes>
 	</mj-head>
 	<mj-body background-color="#f6f6f6">
-		<mj-section background-color="#ffffff" border-top="10px solid #eb4f27" padding="20px 40px">
+		<mj-section background-color="#ffffff" border-top="10px solid #007a55" padding="20px 40px">
 			<mj-column>
 				{@html $locale.changePassword.letter.content
 					.replace('{passcode}', passcode)

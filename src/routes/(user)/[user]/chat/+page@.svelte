@@ -41,21 +41,25 @@
 			name="text"
 			placeholder="Message"
 			rows={1}
-			class="mx-4 w-full resize-none overflow-hidden bg-white dark:bg-gray-800"
+			class="mx-4 w-full resize-none bg-white dark:bg-gray-800"
 			classes={{ div: 'w-full' }}
 			oninput={(evt) => {
-				evt.target.style.height = '0px';
-				evt.target.style.height = evt.target.scrollHeight + 2 + 'px';
+				const target = evt.target as HTMLTextAreaElement;
+
+				target.style.height = '0px';
+				target.style.height = Math.min(target.scrollHeight, 140) + 2 + 'px';
 			}}
 			onkeypress={(evt) => {
-				if (evt.keyCode === 13 && !evt.shiftKey) {
+				const target = evt.target as HTMLTextAreaElement;
+
+				if (evt.key === 'Enter' && !evt.shiftKey) {
 					evt.preventDefault();
 
-					if (evt.target.value === '') return;
+					const value = target.value.trim();
+					if (!value) return;
 
-					evt.target.value = '';
-					evt.target.style.height = '0px';
-					evt.target.style.height = evt.target.scrollHeight + 2 + 'px';
+					target.value = '';
+					target.style.height = 'auto';
 				}
 			}}
 		/>

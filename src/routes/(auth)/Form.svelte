@@ -26,7 +26,41 @@
 >
 	{@render children()}
 
-	<Button type="submit" class={{ 'mt-10 w-full': true, 'animation-shake': failure }} {loading}>
+	<Button type="submit" class={{ 'mt-10 w-full': true, 'animate-failure': failure }} {loading}>
 		{@render button()}
 	</Button>
 </form>
+
+<style>
+	:global(.animate-failure) {
+		animation: failure 0.8s ease both;
+	}
+
+	@keyframes failure {
+		0%,
+		100% {
+			transform: translateX(0);
+		}
+
+		10%,
+		30%,
+		50%,
+		70% {
+			transform: translateX(-4px);
+		}
+
+		20%,
+		40%,
+		60% {
+			transform: translateX(4px);
+		}
+
+		80% {
+			transform: translateX(2px);
+		}
+
+		90% {
+			transform: translateX(-2px);
+		}
+	}
+</style>
