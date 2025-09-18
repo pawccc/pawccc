@@ -37,15 +37,15 @@
 		"prettier": "^3.6.2",
 		"prettier-plugin-svelte": "^3.4.0",
 		"prettier-plugin-tailwindcss": "^0.6.14",
-		"svelte": "^5.38.10",
+		"svelte": "^5.39.2",
 		"svelte-check": "^4.3.1",
 		"tailwindcss": "^4.1.13",
 		"typescript": "^5.9.2",
 		"typescript-eslint": "^8.44.0",
 		"valibot": "^1.1.0",
-		"vite": "^7.1.5"
+		"vite": "^7.1.6"
 	},
 	"patchedDependencies": {
-		"@sveltejs/kit@2.39.1": "patches/@sveltejs%2Fkit@2.39.1.patch"
+		"@sveltejs/kit@2.42.1": "patches/@sveltejs%2Fkit@2.42.1.patch"
 	}
 }
