@@ -5,13 +5,13 @@ import mjml2html from 'mjml';
 import nodemailer from 'nodemailer';
 import Mail from 'nodemailer/lib/mailer';
 
-import { RESEND_API_KEY } from '$env/static/private';
+import { env } from '$env/dynamic/private';
 
 const transporter = nodemailer.createTransport({
 	host: 'smtp.resend.com',
 	auth: {
 		user: 'resend',
-		pass: RESEND_API_KEY
+		pass: env.RESEND_API_KEY
 	},
 	secure: true,
 	port: 465
@@ -26,12 +26,9 @@ export const sendMail = async <
 	props: Omit<Props, '$$slots' | '$$events'>
 ) => {
 	const { head, body } = render(comp, { props });
-	const { html } = mjml2html(
-		`<mjml lang="en">
+	const { html } = mjml2html(`<mjml lang="en">
     <mj-head>${head}</mj-head>
     <mj-body background-color="#f6f6f6">${body}</mj-body>
-  </mjml>`,
-		{ minify: true }
-	); // FIXME code
+  </mjml>`); // FIXME lang
 	await transporter.sendMail({ html, ...mailOptions });
 };

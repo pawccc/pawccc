@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { PUBLIC_AUTH_PASSCODE_EXPIRY } from '$env/static/public';
+	import { env } from '$env/dynamic/private';
 
 	import locale from '$lib/locales';
 
@@ -20,7 +20,7 @@
 	<mj-column>
 		{@html $locale.changePassword.letter.content
 			.replace('{passcode}', passcode)
-			.replace('{passcode_expiry}', PUBLIC_AUTH_PASSCODE_EXPIRY)}
+			.replace('{passcode_expiry}', env.AUTH_PASSCODE_EXPIRY)}
 	</mj-column>
 </mj-section>
 

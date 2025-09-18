@@ -25,7 +25,7 @@ export const actions: Actions = {
 		if (typeof username !== 'string' || !usernameRegex.test(username)) return fail(400);
 
 		const [user] = await sql`INSERT INTO "user" (email, username)
-														 VALUES (${email}, ${username})
+														 VALUES (lower(${email}), lower(${username}))
 														 ON CONFLICT DO NOTHING
 												     RETURNING passcode`;
 		if (!user) return fail(400);
@@ -34,7 +34,7 @@ export const actions: Actions = {
 			{
 				from: 'pawc.cc <no-reply@pawc.cc>',
 				to: email,
-				subject: 'Change password request'
+				subject: 'Change password request' // FIXME changePassword.letter.subject
 			},
 			ChangePassword,
 			{

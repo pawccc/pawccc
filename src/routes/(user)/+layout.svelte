@@ -8,7 +8,7 @@
 	{@render children?.()}
 </div>
 
-<BottomNav position="absolute" navType="pagination" class="h-15" classes={{ inner: 'grid-cols-3' }}>
+<BottomNav position="absolute" navType="pagination" classes={{ inner: 'grid-cols-3' }}>
 	<BottomNavItem btnName="Explore" href="/">
 		<span
 			class="fa fa-fw fa-lg fa-search mb-1 text-gray-500 group-hover:text-primary-600 dark:text-gray-400 dark:group-hover:text-primary-500"

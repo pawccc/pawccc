@@ -21,7 +21,7 @@ export const actions: Actions = {
 		const [user] = await sql`UPDATE "user"
 								             SET passcode      = DEFAULT,
 									 	             passcode_date = DEFAULT
-								             WHERE username = ${username}
+								             WHERE username = lower(${username})
 									             AND (passcode IS NULL OR passcode_date + INTERVAL '1 hour' < now())
 								             RETURNING email, passcode`; // FIXME PUBLIC_AUTH_PASSCODE_EXPIRY
 		if (!user) return fail(400);

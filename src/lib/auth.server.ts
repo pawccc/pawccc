@@ -14,7 +14,7 @@ export const { handle, signIn, signOut } = SvelteKitAuth({
 			authorize: async (credentials) => {
 				const [user] = await sql`SELECT id, username, password
 										             FROM "user"
-									               WHERE username = ${credentials.username}`;
+									               WHERE username = lower(${credentials.username})`;
 				if (
 					!user ||
 					!user.password ||

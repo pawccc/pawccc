@@ -33,7 +33,7 @@
 		"flowbite-svelte": "^1.13.8",
 		"fontawesome-free": "^1.0.4",
 		"globals": "^16.4.0",
-		"mjml": "^4.15.3",
+		"mjml": "^5.0.0-alpha.6",
 		"nodemailer": "^7.0.6",
 		"prettier": "^3.6.2",
 		"prettier-plugin-svelte": "^3.4.0",

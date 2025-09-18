@@ -3,7 +3,7 @@
 </script>
 
 <svelte:head>
-	<title>{page.error.message}</title>
+	<title>{page.error.message} • pawc.cc</title>
 </svelte:head>
 
 <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transform text-center">
